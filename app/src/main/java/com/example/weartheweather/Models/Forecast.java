@@ -1,5 +1,6 @@
-package com.example.weartheweather;
+package com.example.weartheweather.Models;
 
+import com.example.weartheweather.Models.Weather;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
