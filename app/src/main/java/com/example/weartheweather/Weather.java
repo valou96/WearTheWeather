@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Weather implements Serializable {
-    @SerializedName("temp")
-    private double temp;
+    @SerializedName("description")
+    private double description;
 
 
     public double getTemp() {
-        return temp;
+        return description;
     }
 }
