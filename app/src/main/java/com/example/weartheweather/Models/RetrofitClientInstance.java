@@ -1,4 +1,4 @@
-package com.example.weartheweather;
+package com.example.weartheweather.Models;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

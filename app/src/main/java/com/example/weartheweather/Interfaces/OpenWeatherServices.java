@@ -1,4 +1,4 @@
-package com.example.weartheweather;
+package com.example.weartheweather.Interfaces;
 
 import com.example.weartheweather.Models.Forecast;
 
