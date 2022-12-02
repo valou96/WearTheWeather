@@ -1,15 +1,25 @@
 package com.example.weartheweather;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.weartheweather.Interfaces.OpenWeatherServices;
 import com.example.weartheweather.Models.Forecast;
+import com.example.weartheweather.Models.RetrofitClientInstance;
 import com.example.weartheweather.databinding.ActivityMainBinding;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,12 +29,65 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private ArrayList<Forecast> Meteos;
 
+
+
+
+
+
+    private ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new  ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if(result.getResultCode() == 1){
+                Intent resultIntent = result.getData();
+                if(resultIntent != null){
+                    //Log.d("Resultat", resultIntent.getSerializableExtra("monObjetRecupere").toString() );
+                }
+            }
+        }
+    });
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+
+        binding.TxtmeteoplusUn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),ClothActivity.class);
+                //intent.putExtra(); // voir put extra avec M.Tissot
+                startActivity(intent);
+            }
+        });
+
+        binding.TxtmeteoplusDeux.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),ClothActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.TxtmeteoplusTrois.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),ClothActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.TxtmeteoplusQuatre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),ClothActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         OpenWeatherServices service =

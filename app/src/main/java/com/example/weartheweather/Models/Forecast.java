@@ -1,9 +1,12 @@
 package com.example.weartheweather.Models;
 
 import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
+
 
 public class Forecast implements Serializable {
 
@@ -27,8 +30,10 @@ public class Forecast implements Serializable {
         this.main = main;
     }
 
-    public int getDatetime() {
-        return datetime;
+    public Date getDatetime() {
+        Instant instant = Instant.ofEpochSecond(datetime);
+        Date date = Date.from( instant );
+        return date;
     }
 
     public Main getMain() {
