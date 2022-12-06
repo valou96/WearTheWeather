@@ -15,6 +15,10 @@ public class Main implements Serializable {
     @SerializedName("humidity")
     private double humidity;
 
+    public Main(double temp){
+        this.temp = temp;
+    }
+
 
 
 

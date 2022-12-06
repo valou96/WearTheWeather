@@ -1,25 +1,26 @@
 package com.example.weartheweather;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
-
+import com.example.weartheweather.Adapters.RecyclerViewAdapterDateduJour;
 import com.example.weartheweather.Interfaces.OpenWeatherServices;
 import com.example.weartheweather.Models.Forecast;
+import com.example.weartheweather.Models.Main;
 import com.example.weartheweather.Models.RetrofitClientInstance;
 import com.example.weartheweather.databinding.ActivityMainBinding;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +29,8 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private ArrayList<Forecast> Meteos;
+    private List<Forecast> dataForecast;
+    private RecyclerViewAdapterDateduJour dateduJour;
 
 
 
@@ -55,6 +58,18 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+        ArrayList<Forecast> forecasts = new ArrayList<>();
+        forecasts.add(new Forecast(10022022, new Main(28.3)));
+        forecasts.add(new Forecast(10082022, new Main(26.3)));
+        forecasts.add(new Forecast(10052022, new Main(22.9)));
+
+        binding.rvDateDuJour.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        binding.rvDateDuJour.setLayoutManager(layoutManager);
+        binding.rvDateDuJour.setFocusable(false);
+
+        RecyclerViewAdapterDateduJour myAdapterdateDuJour = new RecyclerViewAdapterDateduJour(forecasts);
+        binding.rvDateDuJour.setAdapter(myAdapterdateDuJour);
 
         binding.TxtmeteoplusUn.setOnClickListener(new View.OnClickListener() {
             @Override
