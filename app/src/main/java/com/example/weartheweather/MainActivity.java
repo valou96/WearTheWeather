@@ -11,9 +11,12 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.weartheweather.Adapters.RecyclerViewAdapterDateduJour;
 import com.example.weartheweather.Interfaces.OpenWeatherServices;
+import com.example.weartheweather.Interfaces.RecyclerViewClickListener;
+import com.example.weartheweather.Listeners.RecyclerTouchListener;
 import com.example.weartheweather.Models.Forecast;
 import com.example.weartheweather.Models.Main;
 import com.example.weartheweather.Models.RetrofitClientInstance;
@@ -31,11 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Forecast> Meteos;
     private List<Forecast> dataForecast;
     private RecyclerViewAdapterDateduJour dateduJour;
-
-
-
-
-
 
     private ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new  ActivityResultCallback<ActivityResult>() {
         @Override
@@ -58,18 +56,14 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        ArrayList<Forecast> forecasts = new ArrayList<>();
-        forecasts.add(new Forecast(10022022, new Main(28.3)));
-        forecasts.add(new Forecast(10082022, new Main(26.3)));
-        forecasts.add(new Forecast(10052022, new Main(22.9)));
+//        ArrayList<Forecast> forecasts = new ArrayList<>();
+//        forecasts.add(new Forecast(10022022, new Main(28.3)));
+//        forecasts.add(new Forecast(10082022, new Main(26.3)));
+//        forecasts.add(new Forecast(10052022, new Main(22.9)));
 
-        binding.rvDateDuJour.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        binding.rvDateDuJour.setLayoutManager(layoutManager);
-        binding.rvDateDuJour.setFocusable(false);
 
-        RecyclerViewAdapterDateduJour myAdapterdateDuJour = new RecyclerViewAdapterDateduJour(forecasts);
-        binding.rvDateDuJour.setAdapter(myAdapterdateDuJour);
+
+
 
         binding.TxtmeteoplusUn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +98,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        binding.rvDateDuJour.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), binding.rvDateDuJour, new RecyclerViewClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent = new Intent(getApplicationContext(), ClothActivity.class);
+                startActivity(intent);
+            }
+        }));
+
 
         OpenWeatherServices service =
                 RetrofitClientInstance.getRetrofitInstance().create(OpenWeatherServices.
@@ -118,6 +120,14 @@ public class MainActivity extends AppCompatActivity {
                 binding.TxtmeteoplusDeux.setText(String.valueOf(forecast.getForecasts().get(7).getDatetime()));
                 binding.TxtmeteoplusTrois.setText(String.valueOf(forecast.getForecasts().get(15).getDatetime()));
                 binding.TxtmeteoplusQuatre.setText(String.valueOf(forecast.getForecasts().get(23).getDatetime()));
+
+                //binding pour le rvDateDuJour
+                binding.rvDateDuJour.setHasFixedSize(true);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+                binding.rvDateDuJour.setLayoutManager(layoutManager);
+                binding.rvDateDuJour.setFocusable(false);
+                RecyclerViewAdapterDateduJour myAdapterdateDuJour = new RecyclerViewAdapterDateduJour(forecast.getForecasts());
+                binding.rvDateDuJour.setAdapter(myAdapterdateDuJour);
             }
 
             @Override

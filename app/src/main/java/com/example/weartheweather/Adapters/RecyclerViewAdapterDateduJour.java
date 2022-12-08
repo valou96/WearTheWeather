@@ -29,8 +29,8 @@ public class RecyclerViewAdapterDateduJour extends RecyclerView.Adapter<Recycler
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapterDateduJour.RecyclerViewHolder holder, int position) {
-        holder.text_temp.setText(String.valueOf(dataModelList.get(position).getMain().getTemp()));
         holder.text_heure.setText(String.valueOf(dataModelList.get(position).getDatetime()));
+        holder.text_temp.setText(String.valueOf(dataModelList.get(position).getMain().getTemp()));
     }
     public long getItemId(int position){return super.getItemId(position);}
 
@@ -38,15 +38,15 @@ public class RecyclerViewAdapterDateduJour extends RecyclerView.Adapter<Recycler
     public int getItemCount() {return dataModelList.size();}
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
-        TextView text_temp;
         TextView text_heure;
+        TextView text_temp;
 //        ImageView img_temps;
 
         public RecyclerViewHolder(@NonNull View itemView){
             super(itemView);
 
+            text_heure = itemView.findViewById(R.id.text_heure);
             text_temp = itemView.findViewById(R.id.text_temp);
-            text_heure = itemView.findViewById(R.id.text_temp);
 //            img_temps = itemView.findViewById(R.id.text_temp);
         }
 
