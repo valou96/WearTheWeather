@@ -16,28 +16,16 @@
         app:layout_constraintTop_toBottomOf="@+id/IdImageView" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/IdBtnChic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:text="Button"
+        android:text="Chic"
         app:layout_constraintEnd_toStartOf="@+id/IdBtnSportsWear"
         app:layout_constraintStart_toEndOf="@+id/IdBtnCasual"
         app:layout_constraintTop_toBottomOf="@+id/IdImageView" />
-
-    <TextView
-        android:id="@+id/appTittle"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:background="#3694F8"
-        android:gravity="center"
-        android:text="Wear the Weather"
-        android:textSize="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/idDateselect"
@@ -52,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.558"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appTittle" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/IdImageView"
@@ -61,10 +49,11 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
+        android:src="@drawable/imgmanequinnue"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idDateselect"
-        android:src="@drawable/images"/>
+        app:layout_constraintTop_toBottomOf="@+id/idDateselect" />
 
     <Button
         android:id="@+id/IdBtnCasual"
