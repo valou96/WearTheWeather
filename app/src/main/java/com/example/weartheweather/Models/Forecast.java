@@ -44,4 +44,6 @@ public class Forecast implements Serializable {
         return Forecasts;
     }
 
+
+
 }
