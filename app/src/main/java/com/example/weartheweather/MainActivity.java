@@ -34,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Forecast> Meteos;
     private List<Forecast> dataForecast;
     private RecyclerViewAdapterDateduJour dateduJour;
+    private Forecast forecast1;
+    private Forecast forecast2;
+    private Forecast forecast3;
+    private Forecast forecast4;
+
+
 
     private ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new  ActivityResultCallback<ActivityResult>() {
         @Override
@@ -56,10 +62,7 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-//        ArrayList<Forecast> forecasts = new ArrayList<>();
-//        forecasts.add(new Forecast(10022022, new Main(28.3)));
-//        forecasts.add(new Forecast(10082022, new Main(26.3)));
-//        forecasts.add(new Forecast(10052022, new Main(22.9)));
+
 
 
 
@@ -69,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),ClothActivity.class);
-                //intent.putExtra(); // voir put extra avec M.Tissot
+                intent.putExtra("Meteo", forecast1);
                 startActivity(intent);
             }
         });
@@ -78,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),ClothActivity.class);
+                intent.putExtra("Meteo", forecast2);
                 startActivity(intent);
             }
         });
@@ -86,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),ClothActivity.class);
+                intent.putExtra("Meteo", forecast3);
                 startActivity(intent);
             }
         });
@@ -94,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),ClothActivity.class);
+                intent.putExtra("Meteo", forecast4);
                 startActivity(intent);
             }
         });
@@ -102,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view, int position) {
                 Intent intent = new Intent(getApplicationContext(), ClothActivity.class);
+                intent.putExtra("Meteo", dataForecast.get(position));
                 startActivity(intent);
             }
         }));
@@ -116,19 +123,29 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<Forecast> call, Response<Forecast>
                     response) {
                 Forecast forecast = response.body();
-                binding.TxtmeteoplusUn.setText(String.valueOf(forecast.getForecasts().get(0).getDatetime()));
-                binding.TxtmeteoplusDeux.setText(String.valueOf(forecast.getForecasts().get(7).getDatetime()));
-                binding.TxtmeteoplusTrois.setText(String.valueOf(forecast.getForecasts().get(15).getDatetime()));
-                binding.TxtmeteoplusQuatre.setText(String.valueOf(forecast.getForecasts().get(23).getDatetime()));
+                binding.TxtmeteoplusUn.setText(String.valueOf(forecast.getForecasts().get(7).getDatetime()));
+                binding.TxtmeteoplusDeux.setText(String.valueOf(forecast.getForecasts().get(15).getDatetime()));
+                binding.TxtmeteoplusTrois.setText(String.valueOf(forecast.getForecasts().get(23).getDatetime()));
+                binding.TxtmeteoplusQuatre.setText(String.valueOf(forecast.getForecasts().get(30).getDatetime()));
 
+                forecast1 = forecast.getForecasts().get(7);
+                forecast2 = forecast.getForecasts().get(15);
+                forecast3 = forecast.getForecasts().get(23);
+                forecast4 = forecast.getForecasts().get(30);
                 //binding pour le rvDateDuJour
                 binding.rvDateDuJour.setHasFixedSize(true);
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
                 binding.rvDateDuJour.setLayoutManager(layoutManager);
                 binding.rvDateDuJour.setFocusable(false);
+                dataForecast = forecast.getForecasts();
+
                 RecyclerViewAdapterDateduJour myAdapterdateDuJour = new RecyclerViewAdapterDateduJour(forecast.getForecasts());
                 binding.rvDateDuJour.setAdapter(myAdapterdateDuJour);
+
+
             }
+
+
 
             @Override
             public void onFailure(Call<Forecast> call, Throwable t) {
